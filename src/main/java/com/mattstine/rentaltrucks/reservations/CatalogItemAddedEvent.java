@@ -1,4 +1,4 @@
-package com.mattstine.rentaltrucks.catalog;
+package com.mattstine.rentaltrucks.reservations;
 
 import com.mattstine.rentaltrucks.events.Event;
 

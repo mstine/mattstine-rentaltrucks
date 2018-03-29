@@ -1,7 +1,8 @@
-package com.mattstine.rentaltrucks.catalog;
+package com.mattstine.rentaltrucks.reservations;
 
 import com.mattstine.rentaltrucks.events.EventLog;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,5 +25,9 @@ public class Catalog {
 
 	public int size() {
 		return this.items.size();
+	}
+
+	public Set<CatalogItem> findAll() {
+		return Collections.unmodifiableSet(items);
 	}
 }
