@@ -30,7 +30,7 @@ public class CatalogTests {
 
 	@Test
 	public void canCreateCatalogItem() {
-		catalog.add(new CatalogItem());
+		catalog.add(new CatalogItem("15 Foot Truck"));
 
 		assertThat(catalog.size(), is(equalTo(1)));
 	}
@@ -46,7 +46,7 @@ public class CatalogTests {
 		};
 
 		eventLog.subscribe(handler);
-		catalog.add(new CatalogItem());
+		catalog.add(new CatalogItem("15 Foot Truck"));
 
 		assertThat(handler.isInvoked(), is(true));
 	}
