@@ -1,9 +1,6 @@
 package com.mattstine.rentaltrucks.fleet;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -12,7 +9,10 @@ import static java.util.stream.Collectors.toSet;
  */
 public class Store {
 
-	Store() {
+	private UUID id;
+
+	Store(UUID id) {
+		this.id = id;
 	}
 
 	private Map<Integer, Set<Truck>> trucksByType = new HashMap<>();
@@ -50,5 +50,9 @@ public class Store {
 		return trucksByType.get(typeId).stream()
 				.filter(Truck::isRentable)
 				.collect(toSet());
+	}
+
+	public UUID getId() {
+		return id;
 	}
 }

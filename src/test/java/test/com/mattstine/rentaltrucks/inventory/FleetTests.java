@@ -11,6 +11,7 @@ import org.junit.Test;
 import test.com.mattstine.rentaltrucks.support.VerifiableEventHandler;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -48,8 +49,9 @@ public class FleetTests {
 
 	@Test
 	public void canAddStoreToFleet() {
-		fleet.createStore();
+		Store store = fleet.createStore();
 
+		assertThat(store.getId(), notNullValue());
 		assertThat(fleet.storesOnHand(), is(equalTo(1)));
 	}
 
@@ -63,7 +65,7 @@ public class FleetTests {
 			}
 		};
 
-		eventLog.subscribe(handler);
+		eventLog.subscribe("hello", handler);
 		fleet.createStore();
 
 		assertThat(handler.isInvoked(), is(true));

@@ -24,9 +24,9 @@ public class EventLogTests {
 
 	@Test
 	public void shouldAddSubscriber() {
-		eventLog.subscribe(System.out::println);
+		eventLog.subscribe("hello", System.out::println);
 
-		assertThat(eventLog.getNumberOfSubscribers(), is(equalTo(1)));
+		assertThat(eventLog.getNumberOfSubscribers("hello"), is(equalTo(1)));
 	}
 
 	@Test
@@ -38,8 +38,8 @@ public class EventLogTests {
 			}
 		};
 
-		eventLog.subscribe(handler);
-		eventLog.publish(new Event());
+		eventLog.subscribe("hello", handler);
+		eventLog.publish("hello", new Event());
 
 		assertThat(handler.isInvoked(), is(true));
 	}

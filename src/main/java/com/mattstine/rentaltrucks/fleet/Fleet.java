@@ -4,6 +4,7 @@ import com.mattstine.rentaltrucks.events.EventLog;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -50,9 +51,9 @@ public class Fleet {
 	}
 
 	public Store createStore() {
-		Store store = new Store();
+		Store store = new Store(UUID.randomUUID());
 		stores.add(store);
-		eventLog.publish(new StoreAddedEvent());
+		eventLog.publish("hello", new StoreAddedEvent());
 		return store;
 	}
 }

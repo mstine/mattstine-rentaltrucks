@@ -20,7 +20,7 @@ public class Catalog {
 
 	public void add(CatalogItem item) {
 		this.items.add(item);
-		eventLog.publish(new CatalogItemAddedEvent());
+		eventLog.publish("hello", new CatalogItemAddedEvent());
 	}
 
 	public int size() {
