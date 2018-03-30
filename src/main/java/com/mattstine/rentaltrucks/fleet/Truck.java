@@ -1,4 +1,4 @@
-package com.mattstine.rentaltrucks.inventory;
+package com.mattstine.rentaltrucks.fleet;
 
 /**
  * @author Matt Stine

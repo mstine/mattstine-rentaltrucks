@@ -1,7 +1,7 @@
 package test.com.mattstine.rentaltrucks.inventory;
 
-import com.mattstine.rentaltrucks.inventory.Store;
-import com.mattstine.rentaltrucks.inventory.Truck;
+import com.mattstine.rentaltrucks.fleet.Store;
+import com.mattstine.rentaltrucks.fleet.Truck;
 import org.junit.Before;
 import org.junit.Test;
 

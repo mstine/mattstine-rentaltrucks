@@ -1,15 +1,14 @@
-package com.mattstine.rentaltrucks.inventory;
+package com.mattstine.rentaltrucks.fleet;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toSet;
 
 /**
  * @author Matt Stine
  */
-public class Inventory {
+public class Fleet {
 
 	private Set<Truck> trucks = new HashSet<>();
 	private Set<Store> stores = new HashSet<>();
