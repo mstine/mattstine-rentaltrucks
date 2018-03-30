@@ -1,9 +1,14 @@
 package com.mattstine.rentaltrucks.fleet;
 
+import com.mattstine.rentaltrucks.reservations.Catalog;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toSet;
 
 /**
  * @author Matt Stine
@@ -33,5 +38,17 @@ public class Store {
 		trucksByType
 				.get(truck.getTypeId())
 				.remove(truck);
+	}
+
+	public boolean hasTruck(Truck truck) {
+		return trucksByType.get(truck.getTypeId()).contains(truck);
+	}
+
+	public Set<Truck> findRentableTrucks(int typeId) {
+		trucksByType.computeIfAbsent(typeId, k -> new HashSet<>());
+
+		return trucksByType.get(typeId).stream()
+				.filter(Truck::isRentable)
+				.collect(toSet());
 	}
 }

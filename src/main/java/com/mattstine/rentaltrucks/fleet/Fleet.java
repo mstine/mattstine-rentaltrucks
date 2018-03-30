@@ -13,10 +13,6 @@ public class Fleet {
 	private Set<Truck> trucks = new HashSet<>();
 	private Set<Store> stores = new HashSet<>();
 
-	public void addTruck(Truck truck) {
-		trucks.add(truck);
-	}
-
 	public int trucksOnHand() {
 		return trucks.size();
 	}
@@ -37,8 +33,16 @@ public class Fleet {
 	}
 
 	public Set<Truck> findRentableTrucks(int typeId, Store store) {
-		return findRentableTrucks(typeId).stream()
-				.filter(t -> t.getStore() == store)
-				.collect(toSet());
+		return store.findRentableTrucks(typeId);
+	}
+
+	public Truck createTruck(int typeId) {
+		Truck truck = new Truck(typeId, false);
+		trucks.add(truck);
+		return truck;
+	}
+
+	public void assignTruck(Truck truck, Store store) {
+		store.addTruck(truck);
 	}
 }

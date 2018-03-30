@@ -16,12 +16,9 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public class FleetTests {
 
 	private static final int TYPE_15_FOOT = 0;
-	private static final int TYPE_24_FOOT = 1;
 
 	private Fleet fleet;
 	private Store store;
-
-	// Fleet keeps track of all the trucks we have at the company
 
 	@Before
 	public void setUp() {
@@ -30,14 +27,21 @@ public class FleetTests {
 	}
 
 	@Test
-	public void canAddTruckToInventory() {
-		fleet.addTruck(new Truck(TYPE_15_FOOT, false, store));
-
+	public void canAddTruckToFleet() {
+		fleet.createTruck(TYPE_15_FOOT);
 		assertThat(fleet.trucksOnHand(), is(equalTo(1)));
 	}
 
 	@Test
-	public void canAddStoreToInventory() {
+	public void canAssignTruckToStore() {
+		Truck truck = fleet.createTruck(TYPE_15_FOOT);
+		fleet.assignTruck(truck, store);
+
+		assertThat(store.hasTruck(truck), is(equalTo(true)));
+	}
+
+	@Test
+	public void canAddStoreToFleet() {
 		fleet.addStore(new Store());
 
 		assertThat(fleet.storesOnHand(), is(equalTo(1)));
@@ -45,24 +49,20 @@ public class FleetTests {
 
 	@Test
 	public void findRentableTrucksByType() {
-		fleet.addTruck(new Truck(TYPE_24_FOOT, true, store));
-
+		Truck truck = fleet.createTruck(TYPE_15_FOOT);
 		assertThat(fleet.findRentableTrucks(TYPE_15_FOOT).size(), is(equalTo(0)));
 
-		fleet.addTruck(new Truck(TYPE_15_FOOT,true, store));
-
+		truck.setRentable(true);
 		assertThat(fleet.findRentableTrucks(TYPE_15_FOOT).size(), is(equalTo(1)));
 	}
 
 	@Test
 	public void findRentableTrucksAtStore() {
-		fleet.addTruck(new Truck(TYPE_24_FOOT, true, store));
-
 		assertThat(fleet.findRentableTrucks(TYPE_15_FOOT, store).size(), is(equalTo(0)));
 
-		fleet.addTruck(new Truck(TYPE_15_FOOT, true, store));
-		fleet.addTruck(new Truck(TYPE_15_FOOT, false, store));
-		fleet.addTruck(new Truck(TYPE_15_FOOT, true, null));
+		Truck truck = fleet.createTruck(TYPE_15_FOOT);
+		fleet.assignTruck(truck, store);
+		truck.setRentable(true);
 
 		assertThat(fleet.findRentableTrucks(TYPE_15_FOOT, store).size(), is(equalTo(1)));
 	}
