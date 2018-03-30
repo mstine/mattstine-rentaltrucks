@@ -6,19 +6,9 @@ package com.mattstine.rentaltrucks.fleet;
 public class Truck {
 
 	private final int typeId;
-	private boolean rentable;
 
-	Truck(int typeId, boolean rentable) {
+	Truck(int typeId) {
 		this.typeId = typeId;
-		this.rentable = rentable;
-	}
-
-	public boolean isRentable() {
-		return rentable;
-	}
-
-	public void setRentable(boolean rentable) {
-		this.rentable = rentable;
 	}
 
 	public int getTypeId() {

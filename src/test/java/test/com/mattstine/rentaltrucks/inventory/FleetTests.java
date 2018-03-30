@@ -72,24 +72,20 @@ public class FleetTests {
 	}
 
 	@Test
-	public void findRentableTrucksByType() {
-		Truck truck = fleet.createTruck(TYPE_15_FOOT);
-		assertThat(fleet.findRentableTrucks(TYPE_15_FOOT).size(), is(equalTo(0)));
-
-		truck.setRentable(true);
-		assertThat(fleet.findRentableTrucks(TYPE_15_FOOT).size(), is(equalTo(1)));
+	public void findTrucksByType() {
+		fleet.createTruck(TYPE_15_FOOT);
+		assertThat(fleet.findTrucksByType(TYPE_15_FOOT).size(), is(equalTo(1)));
 	}
 
 	@Test
-	public void findRentableTrucksAtStore() {
+	public void findTrucksByTypeAndStore() {
 		Store store = fleet.createStore();
-		assertThat(fleet.findRentableTrucks(TYPE_15_FOOT, store).size(), is(equalTo(0)));
+		assertThat(fleet.findTrucksByTypeAndStore(TYPE_15_FOOT, store).size(), is(equalTo(0)));
 
 		Truck truck = fleet.createTruck(TYPE_15_FOOT);
 		fleet.assignTruck(truck, store);
-		truck.setRentable(true);
 
-		assertThat(fleet.findRentableTrucks(TYPE_15_FOOT, store).size(), is(equalTo(1)));
+		assertThat(fleet.findTrucksByTypeAndStore(TYPE_15_FOOT, store).size(), is(equalTo(1)));
 	}
 
 }

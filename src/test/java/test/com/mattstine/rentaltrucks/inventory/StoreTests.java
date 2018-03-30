@@ -55,11 +55,10 @@ public class StoreTests {
 	}
 
 	@Test
-	public void findRentableTrucks() {
+	public void findTrucks() {
 		Truck truck = fleet.createTruck(TYPE_15_FOOT);
-		truck.setRentable(true);
 		store.addTruck(truck);
 
-		assertThat(store.findRentableTrucks(TYPE_15_FOOT).size(), is(equalTo(1)));
+		assertThat(store.findTrucks(TYPE_15_FOOT).size(), is(equalTo(1)));
 	}
 }

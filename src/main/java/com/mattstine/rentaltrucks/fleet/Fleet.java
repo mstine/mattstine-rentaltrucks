@@ -29,19 +29,18 @@ public class Fleet {
 		return stores.size();
 	}
 
-	public Set<Truck> findRentableTrucks(int typeId) {
+	public Set<Truck> findTrucksByType(int typeId) {
 		return trucks.stream()
 				.filter(t -> t.getTypeId() == typeId)
-				.filter(Truck::isRentable)
 				.collect(toSet());
 	}
 
-	public Set<Truck> findRentableTrucks(int typeId, Store store) {
-		return store.findRentableTrucks(typeId);
+	public Set<Truck> findTrucksByTypeAndStore(int typeId, Store store) {
+		return store.findTrucks(typeId);
 	}
 
 	public Truck createTruck(int typeId) {
-		Truck truck = new Truck(typeId, false);
+		Truck truck = new Truck(typeId);
 		trucks.add(truck);
 		return truck;
 	}

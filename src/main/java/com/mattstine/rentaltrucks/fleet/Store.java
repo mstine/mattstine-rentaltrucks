@@ -44,12 +44,8 @@ public class Store {
 		return trucksByType.get(truck.getTypeId()).contains(truck);
 	}
 
-	public Set<Truck> findRentableTrucks(int typeId) {
-		trucksByType.computeIfAbsent(typeId, k -> new HashSet<>());
-
-		return trucksByType.get(typeId).stream()
-				.filter(Truck::isRentable)
-				.collect(toSet());
+	public Set<Truck> findTrucks(int typeId) {
+		return Collections.unmodifiableSet(trucksByType.computeIfAbsent(typeId, k -> new HashSet<>()));
 	}
 
 	public UUID getId() {
