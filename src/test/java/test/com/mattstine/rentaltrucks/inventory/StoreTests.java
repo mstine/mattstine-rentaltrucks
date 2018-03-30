@@ -22,7 +22,7 @@ public class StoreTests {
 	@Before
 	public void setUp() {
 		fleet = new Fleet();
-		store = new Store();
+		store = fleet.createStore();
 	}
 
 	@Test(expected = IllegalArgumentException.class)

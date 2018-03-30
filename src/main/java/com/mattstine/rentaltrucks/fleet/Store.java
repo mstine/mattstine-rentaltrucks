@@ -1,12 +1,9 @@
 package com.mattstine.rentaltrucks.fleet;
 
-import com.mattstine.rentaltrucks.reservations.Catalog;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -14,6 +11,9 @@ import static java.util.stream.Collectors.toSet;
  * @author Matt Stine
  */
 public class Store {
+
+	Store() {
+	}
 
 	private Map<Integer, Set<Truck>> trucksByType = new HashMap<>();
 

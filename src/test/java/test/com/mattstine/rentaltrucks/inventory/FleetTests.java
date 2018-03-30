@@ -18,12 +18,10 @@ public class FleetTests {
 	private static final int TYPE_15_FOOT = 0;
 
 	private Fleet fleet;
-	private Store store;
 
 	@Before
 	public void setUp() {
 		fleet = new Fleet();
-		store = new Store();
 	}
 
 	@Test
@@ -34,6 +32,7 @@ public class FleetTests {
 
 	@Test
 	public void canAssignTruckToStore() {
+		Store store = fleet.createStore();
 		Truck truck = fleet.createTruck(TYPE_15_FOOT);
 		fleet.assignTruck(truck, store);
 
@@ -42,7 +41,7 @@ public class FleetTests {
 
 	@Test
 	public void canAddStoreToFleet() {
-		fleet.addStore(new Store());
+		fleet.createStore();
 
 		assertThat(fleet.storesOnHand(), is(equalTo(1)));
 	}
@@ -58,6 +57,7 @@ public class FleetTests {
 
 	@Test
 	public void findRentableTrucksAtStore() {
+		Store store = fleet.createStore();
 		assertThat(fleet.findRentableTrucks(TYPE_15_FOOT, store).size(), is(equalTo(0)));
 
 		Truck truck = fleet.createTruck(TYPE_15_FOOT);

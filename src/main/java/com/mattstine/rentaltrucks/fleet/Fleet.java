@@ -17,10 +17,6 @@ public class Fleet {
 		return trucks.size();
 	}
 
-	public void addStore(Store store) {
-		stores.add(store);
-	}
-
 	public int storesOnHand() {
 		return stores.size();
 	}
@@ -44,5 +40,11 @@ public class Fleet {
 
 	public void assignTruck(Truck truck, Store store) {
 		store.addTruck(truck);
+	}
+
+	public Store createStore() {
+		Store store = new Store();
+		stores.add(store);
+		return store;
 	}
 }
