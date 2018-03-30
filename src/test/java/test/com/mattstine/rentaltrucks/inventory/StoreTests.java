@@ -1,5 +1,6 @@
 package test.com.mattstine.rentaltrucks.inventory;
 
+import com.mattstine.rentaltrucks.events.EventLog;
 import com.mattstine.rentaltrucks.fleet.Fleet;
 import com.mattstine.rentaltrucks.fleet.Store;
 import com.mattstine.rentaltrucks.fleet.Truck;
@@ -21,7 +22,8 @@ public class StoreTests {
 
 	@Before
 	public void setUp() {
-		fleet = new Fleet();
+		EventLog eventLog = new EventLog();
+		fleet = new Fleet(eventLog);
 		store = fleet.createStore();
 	}
 

@@ -1,5 +1,7 @@
 package com.mattstine.rentaltrucks.fleet;
 
+import com.mattstine.rentaltrucks.events.EventLog;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,8 +12,13 @@ import static java.util.stream.Collectors.toSet;
  */
 public class Fleet {
 
+	private EventLog eventLog;
 	private Set<Truck> trucks = new HashSet<>();
 	private Set<Store> stores = new HashSet<>();
+
+	public Fleet(EventLog eventLog) {
+		this.eventLog = eventLog;
+	}
 
 	public int trucksOnHand() {
 		return trucks.size();
@@ -45,6 +52,7 @@ public class Fleet {
 	public Store createStore() {
 		Store store = new Store();
 		stores.add(store);
+		eventLog.publish(new StoreAddedEvent());
 		return store;
 	}
 }
