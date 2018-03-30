@@ -10,11 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import test.com.mattstine.rentaltrucks.support.VerifiableEventHandler;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsEqual.equalTo;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Matt Stine
@@ -35,7 +31,7 @@ public class FleetTests {
 	@Test
 	public void canAddTruckToFleet() {
 		fleet.createTruck(TYPE_15_FOOT);
-		assertThat(fleet.trucksOnHand(), is(equalTo(1)));
+		assertThat(fleet.trucksOnHand()).isEqualTo(1);
 	}
 
 	@Test
@@ -44,15 +40,15 @@ public class FleetTests {
 		Truck truck = fleet.createTruck(TYPE_15_FOOT);
 		fleet.assignTruck(truck, store);
 
-		assertThat(store.hasTruck(truck), is(equalTo(true)));
+		assertThat(store.hasTruck(truck)).isTrue();
 	}
 
 	@Test
 	public void canAddStoreToFleet() {
 		Store store = fleet.createStore();
 
-		assertThat(store.getId(), notNullValue());
-		assertThat(fleet.storesOnHand(), is(equalTo(1)));
+		assertThat(store.getId()).isNotNull();
+		assertThat(fleet.storesOnHand()).isEqualTo(1);
 	}
 
 	@Test
@@ -61,31 +57,31 @@ public class FleetTests {
 			@Override
 			public void handleEvent(Event e) {
 				invoked = true;
-				assertThat(e, is(instanceOf(StoreAddedEvent.class)));
+				assertThat(e).isExactlyInstanceOf(StoreAddedEvent.class);
 			}
 		};
 
 		eventLog.subscribe("stores", handler);
 		fleet.createStore();
 
-		assertThat(handler.isInvoked(), is(true));
+		assertThat(handler.isInvoked()).isTrue();
 	}
 
 	@Test
 	public void findTrucksByType() {
 		fleet.createTruck(TYPE_15_FOOT);
-		assertThat(fleet.findTrucksByType(TYPE_15_FOOT).size(), is(equalTo(1)));
+		assertThat(fleet.findTrucksByType(TYPE_15_FOOT).size()).isEqualTo(1);
 	}
 
 	@Test
 	public void findTrucksByTypeAndStore() {
 		Store store = fleet.createStore();
-		assertThat(fleet.findTrucksByTypeAndStore(TYPE_15_FOOT, store).size(), is(equalTo(0)));
+		assertThat(fleet.findTrucksByTypeAndStore(TYPE_15_FOOT, store)).hasSize(0);
 
 		Truck truck = fleet.createTruck(TYPE_15_FOOT);
 		fleet.assignTruck(truck, store);
 
-		assertThat(fleet.findTrucksByTypeAndStore(TYPE_15_FOOT, store).size(), is(equalTo(1)));
+		assertThat(fleet.findTrucksByTypeAndStore(TYPE_15_FOOT, store)).hasSize(1);
 	}
 
 }

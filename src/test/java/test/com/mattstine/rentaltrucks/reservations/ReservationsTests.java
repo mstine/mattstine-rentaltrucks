@@ -12,21 +12,20 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.time.Month;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Matt Stine
  */
 public class ReservationsTests {
 
-	private final int STORE_BOULDER = 0;
+	private static final int STORE_BOULDER = 0;
+
 	private EventLog eventStore;
 	private Reservations reservations;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		eventStore = new EventLog();
 		reservations = new Reservations(eventStore);
 	}
@@ -38,7 +37,7 @@ public class ReservationsTests {
 				LocalDateTime.of(2018, Month.MARCH, 1, 10, 00),
 				LocalDateTime.of(2018, Month.MARCH, 2, 10, 00)));
 
-		assertThat(reservations.size(), is(equalTo(1)));
+		assertThat(reservations.size()).isEqualTo(1);
 	}
 
 
@@ -46,14 +45,14 @@ public class ReservationsTests {
 	public void addsStoreRecordOnStoreAddedEvent() {
 		eventStore.publish("stores", new StoreAddedEvent());
 
-		assertThat(reservations.findAllStores().size(), is(equalTo(1)));
+		assertThat(reservations.findAllStores()).hasSize(1);
 	}
 
 	@Test
 	public void doesNotAddStoreOnOtherEvent() {
 		eventStore.publish("catalog", new CatalogItemAddedEvent());
 
-		assertThat(reservations.findAllStores().size(), is(equalTo(0)));
+		assertThat(reservations.findAllStores()).hasSize(0);
 	}
 
 }

@@ -7,9 +7,8 @@ import com.mattstine.rentaltrucks.fleet.Truck;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Matt Stine
@@ -17,6 +16,7 @@ import static org.junit.Assert.assertThat;
 public class StoreTests {
 
 	private static final int TYPE_15_FOOT = 0;
+
 	private Store store;
 	private Fleet fleet;
 
@@ -27,15 +27,16 @@ public class StoreTests {
 		store = fleet.createStore();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void cannotManageTruckType() {
-		store.trucksOnHand(TYPE_15_FOOT);
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> store.trucksOnHand(TYPE_15_FOOT));
 	}
 
 	@Test
 	public void canAddATruckToInventory() {
 		store.addTruck(fleet.createTruck(TYPE_15_FOOT));
-		assertThat(store.trucksOnHand(TYPE_15_FOOT), is(equalTo(1)));
+		assertThat(store.trucksOnHand(TYPE_15_FOOT)).isEqualTo(1);
 	}
 
 	@Test
@@ -43,7 +44,7 @@ public class StoreTests {
 		Truck truck = fleet.createTruck(TYPE_15_FOOT);
 		store.addTruck(truck);
 		store.removeTruck(truck);
-		assertThat(store.trucksOnHand(TYPE_15_FOOT), is(equalTo(0)));
+		assertThat(store.trucksOnHand(TYPE_15_FOOT)).isEqualTo(0);
 	}
 
 	@Test
@@ -51,7 +52,7 @@ public class StoreTests {
 		Truck truck = fleet.createTruck(TYPE_15_FOOT);
 		store.addTruck(truck);
 
-		assertThat(store.hasTruck(truck), is(equalTo(true)));
+		assertThat(store.hasTruck(truck)).isTrue();
 	}
 
 	@Test
@@ -59,6 +60,6 @@ public class StoreTests {
 		Truck truck = fleet.createTruck(TYPE_15_FOOT);
 		store.addTruck(truck);
 
-		assertThat(store.findTrucks(TYPE_15_FOOT).size(), is(equalTo(1)));
+		assertThat(store.findTrucks(TYPE_15_FOOT)).hasSize(1);
 	}
 }

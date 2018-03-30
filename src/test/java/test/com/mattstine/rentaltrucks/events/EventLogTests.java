@@ -6,9 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import test.com.mattstine.rentaltrucks.support.VerifiableEventHandler;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Matt Stine
@@ -24,9 +22,9 @@ public class EventLogTests {
 
 	@Test
 	public void shouldAddSubscriber() {
-		eventLog.subscribe("hello", System.out::println);
+		eventLog.subscribe("some-topic", System.out::println);
 
-		assertThat(eventLog.getNumberOfSubscribers("hello"), is(equalTo(1)));
+		assertThat(eventLog.getNumberOfSubscribers("some-topic")).isEqualTo(1);
 	}
 
 	@Test
@@ -38,9 +36,9 @@ public class EventLogTests {
 			}
 		};
 
-		eventLog.subscribe("hello", handler);
-		eventLog.publish("hello", new Event());
+		eventLog.subscribe("some-topic", handler);
+		eventLog.publish("some-topic", new Event());
 
-		assertThat(handler.isInvoked(), is(true));
+		assertThat(handler.isInvoked()).isTrue();
 	}
 }
