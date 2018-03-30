@@ -52,7 +52,7 @@ public class Fleet {
 	public Store createStore() {
 		Store store = new Store(UUID.randomUUID());
 		stores.add(store);
-		eventLog.publish("hello", new StoreAddedEvent());
+		eventLog.publish("stores", new StoreAddedEvent());
 		return store;
 	}
 }

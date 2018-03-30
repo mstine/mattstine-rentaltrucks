@@ -46,7 +46,7 @@ public class CatalogTests {
 			}
 		};
 
-		eventLog.subscribe("hello", handler);
+		eventLog.subscribe("catalog", handler);
 		catalog.add(new CatalogItem("15 Foot Truck"));
 
 		assertThat(handler.isInvoked(), is(true));

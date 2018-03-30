@@ -65,7 +65,7 @@ public class FleetTests {
 			}
 		};
 
-		eventLog.subscribe("hello", handler);
+		eventLog.subscribe("stores", handler);
 		fleet.createStore();
 
 		assertThat(handler.isInvoked(), is(true));
