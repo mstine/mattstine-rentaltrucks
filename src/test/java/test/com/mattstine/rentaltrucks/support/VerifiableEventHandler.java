@@ -1,5 +1,6 @@
 package test.com.mattstine.rentaltrucks.support;
 
+import com.mattstine.rentaltrucks.events.Event;
 import com.mattstine.rentaltrucks.events.EventHandler;
 
 /**
@@ -10,5 +11,19 @@ public abstract class VerifiableEventHandler implements EventHandler {
 
 	public boolean isInvoked() {
 		return invoked;
+	}
+
+
+
+	public static VerifiableEventHandler of(EventHandler eventHandler) {
+
+
+		return new VerifiableEventHandler() {
+			@Override
+			public void handleEvent(Event e) {
+				invoked = true;
+				eventHandler.handleEvent(e);
+			}
+		};
 	}
 }

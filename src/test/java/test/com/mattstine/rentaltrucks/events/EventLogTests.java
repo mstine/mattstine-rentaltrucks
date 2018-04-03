@@ -29,12 +29,7 @@ public class EventLogTests {
 
 	@Test
 	public void shouldInvokeSubscribersOnPublish() {
-		VerifiableEventHandler handler = new VerifiableEventHandler() {
-			@Override
-			public void handleEvent(Event e) {
-				this.invoked = true;
-			}
-		};
+		VerifiableEventHandler handler = VerifiableEventHandler.of(e -> {});
 
 		eventLog.subscribe("some-topic", handler);
 		eventLog.publish("some-topic", new Event());

@@ -53,13 +53,8 @@ public class FleetTests {
 
 	@Test
 	public void addingStoreFiresEvent() {
-		VerifiableEventHandler handler = new VerifiableEventHandler() {
-			@Override
-			public void handleEvent(Event e) {
-				invoked = true;
-				assertThat(e).isExactlyInstanceOf(StoreAddedEvent.class);
-			}
-		};
+		VerifiableEventHandler handler = VerifiableEventHandler
+				.of(e -> assertThat(e).isExactlyInstanceOf(StoreAddedEvent.class));
 
 		eventLog.subscribe("stores", handler);
 		fleet.createStore();

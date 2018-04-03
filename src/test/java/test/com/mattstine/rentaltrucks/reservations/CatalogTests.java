@@ -34,13 +34,8 @@ public class CatalogTests {
 
 	@Test
 	public void addingCatalogItemFiresEvent() {
-		VerifiableEventHandler handler = new VerifiableEventHandler() {
-			@Override
-			public void handleEvent(Event e) {
-				invoked = true;
-				assertThat(e).isExactlyInstanceOf(CatalogItemAddedEvent.class);
-			}
-		};
+		VerifiableEventHandler handler = VerifiableEventHandler
+				.of(e -> assertThat(e).isExactlyInstanceOf(CatalogItemAddedEvent.class));
 
 		eventLog.subscribe("catalog", handler);
 		catalog.add(new CatalogItem("15 Foot Truck"));
