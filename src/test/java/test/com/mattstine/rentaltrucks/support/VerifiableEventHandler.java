@@ -13,15 +13,11 @@ public abstract class VerifiableEventHandler implements EventHandler {
 		return invoked;
 	}
 
-
-
 	public static VerifiableEventHandler of(EventHandler eventHandler) {
-
-
 		return new VerifiableEventHandler() {
 			@Override
 			public void handleEvent(Event e) {
-				invoked = true;
+				this.invoked = true;
 				eventHandler.handleEvent(e);
 			}
 		};
