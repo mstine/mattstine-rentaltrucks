@@ -26,7 +26,7 @@ public class CatalogTests {
 
     @Test
     public void canCreateCatalogItem() {
-        catalog.add(new CatalogItem("15 Foot Truck"));
+        catalog.add(new CatalogItem("some-id", "15 Foot Truck"));
 
         assertThat(catalog.size()).isEqualTo(1);
     }
@@ -37,14 +37,14 @@ public class CatalogTests {
                 .of(e -> assertThat(e).isExactlyInstanceOf(CatalogItemAddedEvent.class));
 
         eventLog.subscribe("catalog", handler);
-        catalog.add(new CatalogItem("15 Foot Truck"));
+        catalog.add(new CatalogItem("some-id", "15 Foot Truck"));
 
         assertThat(handler.isInvoked()).isTrue();
     }
 
     @Test
     public void canFindAllCatalogItems() {
-        CatalogItem item = new CatalogItem("15 Foot Truck");
+        CatalogItem item = new CatalogItem("some-id", "15 Foot Truck");
         catalog.add(item);
 
         assertThat(catalog.findAll()).contains(item);

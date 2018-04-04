@@ -33,7 +33,7 @@ public class ReservationsTests {
     @Test
     public void canCreateReservation() {
         reservations.add(new Reservation(STORE_BOULDER,
-                new CatalogItem("15 Foot Truck"),
+                new CatalogItem("some-id", "15 Foot Truck"),
                 LocalDateTime.of(2018, Month.MARCH, 1, 10, 00),
                 LocalDateTime.of(2018, Month.MARCH, 2, 10, 00)));
 
