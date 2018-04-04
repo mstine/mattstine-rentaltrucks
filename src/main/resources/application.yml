@@ -1,0 +1,13 @@
+---
+
+server:
+  port: 8280
+
+spring:
+  data:
+    cassandra:
+      cluster-name: Test Cluster
+      keyspace-name: rentaltrucks
+      username: cassandra
+      password: cassandra
+      schema-action: recreate_drop_unused
