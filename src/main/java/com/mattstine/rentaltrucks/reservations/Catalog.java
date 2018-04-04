@@ -11,23 +11,23 @@ import java.util.Set;
  */
 public class Catalog {
 
-	private final EventLog eventLog;
-	private Set<CatalogItem> items = new HashSet<>();
+    private final EventLog eventLog;
+    private Set<CatalogItem> items = new HashSet<>();
 
-	public Catalog(EventLog eventLog) {
-		this.eventLog = eventLog;
-	}
+    public Catalog(EventLog eventLog) {
+        this.eventLog = eventLog;
+    }
 
-	public void add(CatalogItem item) {
-		this.items.add(item);
-		eventLog.publish("catalog", new CatalogItemAddedEvent());
-	}
+    public void add(CatalogItem item) {
+        this.items.add(item);
+        eventLog.publish("catalog", new CatalogItemAddedEvent());
+    }
 
-	public int size() {
-		return this.items.size();
-	}
+    public int size() {
+        return this.items.size();
+    }
 
-	public Set<CatalogItem> findAll() {
-		return Collections.unmodifiableSet(items);
-	}
+    public Set<CatalogItem> findAll() {
+        return Collections.unmodifiableSet(items);
+    }
 }

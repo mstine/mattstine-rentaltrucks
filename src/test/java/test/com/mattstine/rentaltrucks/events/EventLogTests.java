@@ -13,27 +13,28 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class EventLogTests {
 
-	private EventLog eventLog;
+    private EventLog eventLog;
 
-	@Before
-	public void setUp() {
-		this.eventLog = new EventLog();
-	}
+    @Before
+    public void setUp() {
+        this.eventLog = new EventLog();
+    }
 
-	@Test
-	public void shouldAddSubscriber() {
-		eventLog.subscribe("some-topic", System.out::println);
+    @Test
+    public void shouldAddSubscriber() {
+        eventLog.subscribe("some-topic", System.out::println);
 
-		assertThat(eventLog.getNumberOfSubscribers("some-topic")).isEqualTo(1);
-	}
+        assertThat(eventLog.getNumberOfSubscribers("some-topic")).isEqualTo(1);
+    }
 
-	@Test
-	public void shouldInvokeSubscribersOnPublish() {
-		VerifiableEventHandler handler = VerifiableEventHandler.of(e -> {});
+    @Test
+    public void shouldInvokeSubscribersOnPublish() {
+        VerifiableEventHandler handler = VerifiableEventHandler.of(e -> {
+        });
 
-		eventLog.subscribe("some-topic", handler);
-		eventLog.publish("some-topic", new Event());
+        eventLog.subscribe("some-topic", handler);
+        eventLog.publish("some-topic", new Event());
 
-		assertThat(handler.isInvoked()).isTrue();
-	}
+        assertThat(handler.isInvoked()).isTrue();
+    }
 }

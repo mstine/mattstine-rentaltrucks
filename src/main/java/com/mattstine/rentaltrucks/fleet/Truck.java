@@ -5,13 +5,13 @@ package com.mattstine.rentaltrucks.fleet;
  */
 public class Truck {
 
-	private final int typeId;
+    private final int typeId;
 
-	Truck(int typeId) {
-		this.typeId = typeId;
-	}
+    Truck(int typeId) {
+        this.typeId = typeId;
+    }
 
-	public int getTypeId() {
-		return typeId;
-	}
+    public int getTypeId() {
+        return typeId;
+    }
 }

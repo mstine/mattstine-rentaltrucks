@@ -11,25 +11,25 @@ import java.util.Set;
  */
 public class Reservations {
 
-	private final EventLog eventLog;
-	private final Set<Store> stores = new HashSet<>();
-	private Set<Reservation> reservations = new HashSet<>();
+    private final EventLog eventLog;
+    private final Set<Store> stores = new HashSet<>();
+    private Set<Reservation> reservations = new HashSet<>();
 
-	public Reservations(EventLog eventLog) {
-		this.eventLog = eventLog;
+    public Reservations(EventLog eventLog) {
+        this.eventLog = eventLog;
 
-		this.eventLog.subscribe("stores", event -> this.stores.add(new Store()));
-	}
+        this.eventLog.subscribe("stores", event -> this.stores.add(new Store()));
+    }
 
-	public void add(Reservation reservation) {
-		reservations.add(reservation);
-	}
+    public void add(Reservation reservation) {
+        reservations.add(reservation);
+    }
 
-	public int size() {
-		return reservations.size();
-	}
+    public int size() {
+        return reservations.size();
+    }
 
-	public Set<Store> findAllStores() {
-		return Collections.unmodifiableSet(stores);
-	}
+    public Set<Store> findAllStores() {
+        return Collections.unmodifiableSet(stores);
+    }
 }
